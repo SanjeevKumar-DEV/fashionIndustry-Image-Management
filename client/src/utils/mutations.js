@@ -64,3 +64,20 @@ mutation Mutation($colourCode: Int!) {
   }
 }
 `;
+
+export const ADD_STYLE_WITH_CODE = gql`
+mutation Mutation($styleCode: Int!, $colours: [ID]!) {
+  addStyleWithStyleCode(styleCode: $styleCode, colours: $colours) {
+    _id
+    styleName
+    styleCode
+    styleDesc
+    colours {
+      _id
+      colourName
+      colourCode
+      colourDesc
+    }
+  }
+}
+`;
