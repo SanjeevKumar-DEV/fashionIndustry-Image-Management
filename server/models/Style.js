@@ -4,7 +4,7 @@ const { Schema, model } = require('mongoose');
 const styleSchema = new Schema({
     styleName: {
     type: String,
-    required: true,
+    required: false,
     minlength: 3,
     maxlength: 30,
     trim: true,
@@ -18,7 +18,7 @@ const styleSchema = new Schema({
   },
   styleDesc: {
     type: String,
-    required: true,
+    required: false,
     minlength: 6,
     maxlength: 280,
     trim: true,

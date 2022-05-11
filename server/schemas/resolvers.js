@@ -134,11 +134,24 @@ const resolvers = {
       });
       return colour;
     },
+    addColourWithColourCode: async (parent, { colourCode }) => {
+      const colour = await Colour.create({
+        colourCode
+      });
+      return colour;
+    },
     addStyle: async (parent, { styleName, styleCode, styleDesc, colours }) => {
       const style = await Style.create({
         styleName,
         styleCode,
         styleDesc,
+        colours,
+      });
+      return style.populate("colours");
+    },
+    addStyleWithStyleCode: async (parent, { styleCode, colours }) => {
+      const style = await Style.create({
+        styleCode,
         colours,
       });
       return style.populate("colours");

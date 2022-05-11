@@ -72,7 +72,9 @@ const typeDefs = gql`
     removeThought(thoughtId: ID!): Thought
     removeComment(thoughtId: ID!, commentId: ID!): Thought
     addColour(colourName: String!, colourCode: Int!, colourDesc: String!): Colour
-    addStyle(styleName: String!, styleCode: Int!, styleDesc: String!, colours: [ID]!): Style
+    addColourWithColourCode(colourCode: Int!): Colour
+    addStyle(styleCode: Int!, colours: [ID]!): Style
+    addStyleWithStyleCode(styleName: String, styleCode: Int!, styleDesc: String, colours: [ID]!): Style
     addImage(imageName: String!, imageURL: String!, style: ID!, colour: ID!): Image
   }
 `;
