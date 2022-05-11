@@ -54,3 +54,13 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+export const ADD_COLOUR_WITH_CODE = gql`
+mutation Mutation($colourCode: Int!) {
+  addColourWithColourCode(colourCode: $colourCode) {
+    _id
+    colourName
+    colourCode
+    colourDesc
+  }
+}
+`;
