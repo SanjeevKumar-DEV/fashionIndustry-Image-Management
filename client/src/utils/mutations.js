@@ -1,3 +1,4 @@
+// test
 import { gql } from '@apollo/client';
 
 export const LOGIN_USER = gql`
@@ -66,6 +67,7 @@ mutation Mutation($colourCode: Int!) {
 `;
 
 export const ADD_STYLE_WITH_CODE = gql`
+
 mutation Mutation($styleCode: Int!, $colours: [ID]!) {
   addStyleWithStyleCode(styleCode: $styleCode, colours: $colours) {
     _id
@@ -73,6 +75,29 @@ mutation Mutation($styleCode: Int!, $colours: [ID]!) {
     styleCode
     styleDesc
     colours {
+      _id
+      colourName
+      colourCode
+      colourDesc
+    }
+  }
+}
+`;
+
+export const ADD_IMAGE = gql`
+mutation Mutation($imageName: String!, $imageUrl: String!, $style: ID!, $colour: ID!) {
+  addImage(imageName: $imageName, imageURL: $imageUrl, style: $style, colour: $colour) {
+    _id
+    imageName
+    imageURL
+    createdAt
+    style {
+      _id
+      styleName
+      styleCode
+      styleDesc
+    }
+    colour {
       _id
       colourName
       colourCode
