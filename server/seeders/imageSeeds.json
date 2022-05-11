@@ -1,0 +1,17 @@
+[
+    {
+      "_id" : "627a4233b59df906ea2d1be7",
+      "imageName": "Weeding-Gown-Green-Colour-F",
+      "imageURL": "http://res.cloudinary.com/pim-assets/image/upload/v1652177721/pim-asset-upload/PHOTO-2022-02-09-21-43-24_pw58d9.jpg",
+      "style": "627a3f788ff43e8c38987855",
+      "colour" : "627a4159c548608e13cd3476"
+    },
+    {
+      "_id" : "627a424718b58f5f584c0efe",
+      "imageName": "Weeding-Gown-Green-Colour-D",
+      "imageURL": "http://res.cloudinary.com/pim-assets/image/upload/v1652177721/pim-asset-upload/PHOTO-2022-02-09-21-43-23_xqju05.jpg",
+      "style": "627a3f788ff43e8c38987855",
+      "colour" : "627a4159c548608e13cd3476"
+    }
+]
+

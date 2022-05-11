@@ -1,0 +1,23 @@
+[
+    {
+      "_id" : "627a3f788ff43e8c38987855",
+      "styleName": "Wedding-Gown",
+      "styleCode": 2000001,
+      "styleDesc": "Wedding Gown suited for other occassions",
+      "colours": ["627a4159c548608e13cd3476", "627a4167a52e67f7fd36cc96"]
+    },
+    {
+      "_id" : "627a40b02dccb30362281786",
+      "styleName": "Wedding-Suit",
+      "styleCode": 2000002,
+      "styleDesc": "Wedding Suit",
+      "colours": ["627a4159c548608e13cd3476"]
+    },
+    {
+      "_id" : "627a40dcd0187872cea690df",
+      "styleName": "Evening-Dress",
+      "styleCode": 2000003,
+      "styleDesc": "Evening Dress",
+      "colours": ["627a4159c548608e13cd3476", "627a4167a52e67f7fd36cc96", "627a41766b75dd98dfeaac89"]
+    }
+]

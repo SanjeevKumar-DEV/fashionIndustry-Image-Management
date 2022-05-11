@@ -1,0 +1,21 @@
+Retail and Fashion Industry Product Image Management System
+
+Requirement
+a. Upload a Multiple images for a single product (ClickToUpload, Drag And Drop) (UI)
+b. Upload Bulk Image for Multiple Products (ClickToUpload, Drag And Drop multiple Images) (UI)
+c. Delete an uploaded Image (UI)
+d. Each image upload will have a unique name (NON-UI)
+e. View all existing uploaded images for a product (UI)
+f. On Re-upload of an existing Image with same name existing image gets deleted and new one gets uploaded (UI and NON-UI)
+g. Image will have four attributes (Image name, style code, colour code, size code, image type) (NON-UI)
+h. Image type can be Front, Back, Side, Mannequein (NON UI)
+i. Image will have naming convention styleCode_ColourCode_SizeCode_ImageType (NON-UI)
+j. A product have style code, colour code and size code (NON-UI)
+k. A single product can have multiple valid images but each image will have unique name.
+
+Models
+Image
+ImageType
+Style
+Colour
+Size
