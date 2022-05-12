@@ -8,7 +8,6 @@ import ImageList from "../ImageList";
 const ImageManager = (props) => {
   const [myUploadedImage, setMyUploadedImage] = useState('');
   const imageURLList = useRef([]);
-  let counter = 15;
   const cld = new Cloudinary({
     cloud: {
       cloudName: "pim-assets",
@@ -35,7 +34,8 @@ const ImageManager = (props) => {
     }
   );
 
-  const uploadFiles = () => {
+  const uploadFiles = async (event) => {
+    event.preventDefault();
     myWidget.open();
   };
 
