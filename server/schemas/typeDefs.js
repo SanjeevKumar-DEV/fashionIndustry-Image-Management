@@ -60,8 +60,11 @@ const typeDefs = gql`
     thought(thoughtId: ID!): Thought
     me: User
     styles: [Style]
+    getStyleCode(styleCode: Int!): [Style]
     colours: [Colour]
+    getColourCode(colourCode: Int!): [Colour]
     images: [Image]
+    getImage(imageName: String!): [Image]
   }
 
   type Mutation {

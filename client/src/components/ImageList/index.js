@@ -1,13 +1,13 @@
 import React from "react";
 import { useMutation } from '@apollo/client';
 import { ADD_COLOUR_WITH_CODE, ADD_STYLE_WITH_CODE, ADD_IMAGE  } from '../../utils/mutations';
-// test now with invalid test test test test test test test test test test
+// test now with invalid test test test test test test test test test test test
 
-const ImageList = ({ imageURLList = [] }) => {
+const ImageList = ({ imageURLList = [], render }) => {
 
-  const [addColour, { colourError, colourdata }] = useMutation(ADD_COLOUR_WITH_CODE);
-  const [addStyle, { styleError, styleData }] = useMutation(ADD_STYLE_WITH_CODE);
-  const [addImage, { imageError, imageData }] = useMutation(ADD_IMAGE);
+  const [addColour, { colourError}] = useMutation(ADD_COLOUR_WITH_CODE);
+  const [addStyle, { styleError }] = useMutation(ADD_STYLE_WITH_CODE);
+  const [addImage, { imageError }] = useMutation(ADD_IMAGE);
   if (!imageURLList.length) {
     return <h3>Upload your image Files!</h3>;
   }
@@ -39,15 +39,19 @@ const ImageList = ({ imageURLList = [] }) => {
   console.log(validImageList);
   console.log(invalidImageList);
 
-  // addColour({
-  //   variables: {colourCode : 200000001}
-  // });
-  // console.log(data);
-
+//   let counter = 1;
+//   if (counter === 1)
+//   {
+//   addColour({
+//     variables: {colourCode : 200000001}
+//   });
+//   // console.log(data);
+//   counter++
+// }
   const addImageData = async (event, image, styleCode, colourCode) => {
-
+    event.preventDefault();
     try {
-      addImage({
+      const { data } = await addImage({
         variables : {
           imageName: image.original_filename, 
           imageURL: image.imageURL, 
@@ -55,27 +59,26 @@ const ImageList = ({ imageURLList = [] }) => {
           colour: colourCode
         }
       })
-      console.log(imageData);
-
+      console.log(data);
     }
     catch (event) {
       console.log(event);
       console.log(imageError);
-
     }
 
   };
   
   const addStyleCode = async (event, image, colourId) => {
+    event.preventDefault();
     try {
-      addStyle({
+      const { data } = await addStyle({
         variables: {
           styleCode : parseInt(image.styleCode),
-          colourCode : colourId
+          colours : [colourId]
         }
       });
-      console.log(styleData);
-      addImageData(event, image, styleData.addStyleWithStyleCode._id, colourId);
+      console.log(data);
+      addImageData(event, image, data.addStyleWithStyleCode._id, colourId);
 
     }
     catch (event) {
@@ -87,17 +90,21 @@ const ImageList = ({ imageURLList = [] }) => {
   const addColourCode = (event) => { 
     event.preventDefault();
     validImageList.map( async (image) => {
+      console.log("Image : ");
+      console.log(image);
     try {
-      addColour({
+      const { data } = await addColour({
         variables: {colourCode : parseInt(image.colourCode)}
       });
-      console.log(colourdata);
-      addStyleCode(event, image, colourdata.addColourWithColourCode._id)
+      console.log(data);
+      addStyleCode(event, image, data.addColourWithColourCode._id)
     } catch (event) {
       console.error(event);
       console.error(colourError);
     }
-    window.location.reload();
+    console.log(image);
+    return image;
+    //window.location.reload();
 
   });
 }
@@ -127,8 +134,8 @@ const ImageList = ({ imageURLList = [] }) => {
             </div>
           ))}
       </div>
-      <div className="col-12 mb-3 pb-3">
-      <button id="add-Colour-Code" className="card-header" onClick={addColourCode}>Add Colour Style Image for Valid Images in Database</button>
+      <div >
+      <button id="add-Colour-Code" className="cloudinary-button" onClick={addColourCode}>Add Colour Style Image for Valid Images in Database</button>
       </div>
     <h3
       className="p-5 display-inline-block"

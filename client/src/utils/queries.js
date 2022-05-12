@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_USER = gql`
   query user($username: String!) {
@@ -54,6 +54,29 @@ export const QUERY_ME = gql`
         thoughtText
         thoughtAuthor
         createdAt
+      }
+    }
+  }
+`;
+
+export const QUERY_IMAGE = gql`
+  query Query {
+    images {
+      _id
+      imageName
+      imageURL
+      createdAt
+      colour {
+        _id
+        colourName
+        colourCode
+        colourDesc
+      }
+      style {
+        _id
+        styleName
+        styleCode
+        styleDesc
       }
     }
   }

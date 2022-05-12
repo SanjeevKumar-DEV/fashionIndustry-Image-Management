@@ -85,8 +85,8 @@ mutation Mutation($styleCode: Int!, $colours: [ID]!) {
 `;
 
 export const ADD_IMAGE = gql`
-mutation Mutation($imageName: String!, $imageUrl: String!, $style: ID!, $colour: ID!) {
-  addImage(imageName: $imageName, imageURL: $imageUrl, style: $style, colour: $colour) {
+mutation Mutation($imageName: String!, $imageURL: String!, $style: ID!, $colour: ID!) {
+  addImage(imageName: $imageName, imageURL: $imageURL, style: $style, colour: $colour) {
     _id
     imageName
     imageURL
