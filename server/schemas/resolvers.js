@@ -218,6 +218,10 @@ const resolvers = {
       }
     },
     addImage: async (parent, { imageName, imageURL, style, colour }) => {
+      const data = await Image.findOne({ imageName });
+      if ( data !== null) {
+        return data;
+      }
       const { _id } = await Image.create({
         imageName,
         imageURL,

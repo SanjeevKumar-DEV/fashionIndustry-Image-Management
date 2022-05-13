@@ -94,6 +94,22 @@ mutation Mutation($styleCode: Int!, $colours: [ID]!) {
   }
 }
 `;
+export const ADD_STYLE_CODE_COLOUR_IF_NOT_PRESENT = gql`
+mutation Mutation($styleCode: Int!, $colours: [ID]!) {
+  addStyleWithStyleCodeIfNotPresent(styleCode: $styleCode, colours: $colours) {
+    _id
+    styleName
+    styleCode
+    styleDesc
+    colours {
+      _id
+      colourName
+      colourCode
+      colourDesc
+    }
+  }
+}
+`;
 
 export const ADD_IMAGE = gql`
 mutation Mutation($imageName: String!, $imageURL: String!, $style: ID!, $colour: ID!) {
@@ -117,3 +133,5 @@ mutation Mutation($imageName: String!, $imageURL: String!, $style: ID!, $colour:
   }
 }
 `;
+
+

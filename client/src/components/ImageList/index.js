@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
-import { ADD_COLOUR_WITH_CODE, ADD_STYLE_WITH_CODE, ADD_IMAGE, UPSERT_COLOUR_WITH_CODE  } from '../../utils/mutations';
+import { ADD_COLOUR_WITH_CODE, ADD_STYLE_WITH_CODE, ADD_IMAGE, UPSERT_COLOUR_WITH_CODE, ADD_STYLE_CODE_COLOUR_IF_NOT_PRESENT  } from '../../utils/mutations';
 import { QUERY_COLOUR_BY_COLOUR_CODE } from "../../utils/queries";
 // test now with invalid test test test test test test test test test test test
 
@@ -8,7 +8,8 @@ const ImageList = ({ imageURLList = [], render }) => {
 
   // const [addColour, { colourError}] = useMutation(ADD_COLOUR_WITH_CODE);
   const [addColour, { colourError }] = useMutation(UPSERT_COLOUR_WITH_CODE);
-  const [addStyle, { styleError }] = useMutation(ADD_STYLE_WITH_CODE);
+  // const [addStyle, { styleError }] = useMutation(ADD_STYLE_WITH_CODE);
+  const [addStyle, { styleError }] = useMutation(ADD_STYLE_CODE_COLOUR_IF_NOT_PRESENT);
   const [addImage, { imageError }] = useMutation(ADD_IMAGE);
 
   const [getExistingColourId, { loading, data } ] = useLazyQuery(QUERY_COLOUR_BY_COLOUR_CODE);
@@ -53,15 +54,15 @@ const ImageList = ({ imageURLList = [], render }) => {
 //   // console.log(data);
 //   counter++
 // }
-  const addImageData = async (event, image, styleCode, colourCode) => {
+  const addImageData = async (event, image, styleId, colourId) => {
     event.preventDefault();
     try {
       const { data } = await addImage({
         variables : {
           imageName: image.original_filename, 
           imageURL: image.imageURL, 
-          style: styleCode, 
-          colour: colourCode
+          style: styleId, 
+          colour: colourId
         }
       })
       console.log(data);
@@ -83,7 +84,7 @@ const ImageList = ({ imageURLList = [], render }) => {
         }
       });
       console.log(data);
-      addImageData(event, image, data.addStyleWithStyleCode._id, colourId);
+      addImageData(event, image, data.addStyleWithStyleCodeIfNotPresent._id, colourId);
 
     }
     catch (event) {
