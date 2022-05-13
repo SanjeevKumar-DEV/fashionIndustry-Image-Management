@@ -26,14 +26,23 @@ const resolvers = {
     styles: async () => {
       return Style.find().populate("colours");
     },
+    getStyleCode: async (parent, { styleCode }) => {
+      return Style.findOne({ styleCode }).populate("colours");
+    },
     colours: async () => {
       return Colour.find();
+    },
+    getColourCode: async (parent, { colourCode }) => {
+      return Colour.findOne({ colourCode });
     },
     images: async () => {
       return Image.find().populate("style").populate("colour").populate({
         path: "style",
         populate: "colours",
       });
+    },
+    getImage: async (parent, { imageName }) => {
+      return Image.findOne({ imageName });
     },
   },
 
@@ -136,9 +145,20 @@ const resolvers = {
     },
     addColourWithColourCode: async (parent, { colourCode }) => {
       const colour = await Colour.create({
-        colourCode
+        colourCode,
       });
       return colour;
+    },
+    addColourWithColourCodeNotPresent: async (parent, { colourCode }) => {
+      const data = await Colour.findOne({ colourCode });
+      if (data !== null) {
+        return await Colour.findOne({ colourCode });
+      } else {
+        const colour = await Colour.create({
+          colourCode,
+        });
+        return colour;
+      }
     },
     addStyle: async (parent, { styleName, styleCode, styleDesc, colours }) => {
       const style = await Style.create({
@@ -147,14 +167,55 @@ const resolvers = {
         styleDesc,
         colours,
       });
-      return style.populate("colours");
+      return await style.populate("colours");
     },
     addStyleWithStyleCode: async (parent, { styleCode, colours }) => {
       const style = await Style.create({
         styleCode,
         colours,
       });
-      return style.populate("colours");
+      return await style.populate("colours");
+    },
+    addStyleWithStyleCodeIfNotPresent: async (
+      parent,
+      { styleCode, colours }
+    ) => {
+      
+      const dataWithStyle = await Style.findOne({ styleCode }).populate(
+        "colours"
+      );
+
+      let colourExists = false;
+      if (dataWithStyle) {
+        colourExists = !!dataWithStyle.colours.find((colour) => {
+          return colours[0] == colour._id;
+        });
+      }
+
+      if (colourExists) {
+        console.log("colour exists!");
+        return dataWithStyle;
+      }
+
+      if (dataWithStyle !== null) {
+        console.log("data with style != null");
+        var conditions = {
+          styleCode: styleCode,
+        };
+
+        var update = {
+          $addToSet: { colours: colours[0] },
+        };
+
+        return await Style.findOneAndUpdate(conditions, update);
+      } else {
+        console.log("creating style document");
+        const style = await Style.create({
+          styleCode,
+          colours,
+        });
+        return await style.populate("colours");
+      }
     },
     addImage: async (parent, { imageName, imageURL, style, colour }) => {
       const { _id } = await Image.create({

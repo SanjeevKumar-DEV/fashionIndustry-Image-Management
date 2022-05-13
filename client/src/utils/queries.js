@@ -81,3 +81,27 @@ export const QUERY_IMAGE = gql`
     }
   }
 `;
+
+export const QUERY_STYLE_BY_STYLE_CODE = gql`
+  query Query($styleCode: Int!) {
+    getStyleCode(styleCode: $styleCode) {
+      _id
+    }
+  }
+`;
+
+export const QUERY_COLOUR_BY_COLOUR_CODE = gql`
+query Query($colourCode: Int!) {
+  getColourCode(colourCode: $colourCode) {
+    _id
+  }
+}
+`;
+
+export const QUERY_IMAGE_BY_IMAGE_NAME = gql`
+query Query($imageName: String!) {
+  getImage(imageName: $imageName) {
+    _id
+  }
+}
+`;

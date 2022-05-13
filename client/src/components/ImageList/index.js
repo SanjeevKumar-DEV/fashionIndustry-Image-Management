@@ -1,13 +1,18 @@
 import React from "react";
-import { useMutation } from '@apollo/client';
-import { ADD_COLOUR_WITH_CODE, ADD_STYLE_WITH_CODE, ADD_IMAGE  } from '../../utils/mutations';
+import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
+import { ADD_COLOUR_WITH_CODE, ADD_STYLE_WITH_CODE, ADD_IMAGE, UPSERT_COLOUR_WITH_CODE  } from '../../utils/mutations';
+import { QUERY_COLOUR_BY_COLOUR_CODE } from "../../utils/queries";
 // test now with invalid test test test test test test test test test test test
 
 const ImageList = ({ imageURLList = [], render }) => {
 
-  const [addColour, { colourError}] = useMutation(ADD_COLOUR_WITH_CODE);
+  // const [addColour, { colourError}] = useMutation(ADD_COLOUR_WITH_CODE);
+  const [addColour, { colourError }] = useMutation(UPSERT_COLOUR_WITH_CODE);
   const [addStyle, { styleError }] = useMutation(ADD_STYLE_WITH_CODE);
   const [addImage, { imageError }] = useMutation(ADD_IMAGE);
+
+  const [getExistingColourId, { loading, data } ] = useLazyQuery(QUERY_COLOUR_BY_COLOUR_CODE);
+
   if (!imageURLList.length) {
     return <h3>Upload your image Files!</h3>;
   }
@@ -92,16 +97,30 @@ const ImageList = ({ imageURLList = [], render }) => {
     validImageList.map( async (image) => {
       console.log("Image : ");
       console.log(image);
-    try {
-      const { data } = await addColour({
-        variables: {colourCode : parseInt(image.colourCode)}
-      });
-      console.log(data);
-      addStyleCode(event, image, data.addColourWithColourCode._id)
-    } catch (event) {
-      console.error(event);
-      console.error(colourError);
-    }
+      // const { data } = await getExistingColourId({variables: {colourCode : parseInt(image.colourCode)}});
+      // console.log(data);
+      // while(loading) {
+        
+      // }
+      // if(data.getColourCode === null)
+      // {
+        try {
+          const { data } = await addColour({
+            variables: {colourCode : parseInt(image.colourCode)}
+          });
+          console.log(data);
+          addStyleCode(event, image, data.addColourWithColourCodeNotPresent._id);
+        } catch (event) {
+          console.error(event);
+          console.error(colourError);
+        }
+
+      // }
+      // else {
+      //   // 
+      //   addStyleCode(event, image, data.getColourCode._id);
+      // }
+    
     console.log(image);
     return image;
     //window.location.reload();

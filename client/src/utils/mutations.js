@@ -66,6 +66,17 @@ mutation Mutation($colourCode: Int!) {
 }
 `;
 
+export const UPSERT_COLOUR_WITH_CODE = gql`
+mutation Mutation($colourCode: Int!) {
+  addColourWithColourCodeNotPresent(colourCode: $colourCode) {
+    _id
+    colourName
+    colourCode
+    colourDesc
+  }
+}
+`;
+
 export const ADD_STYLE_WITH_CODE = gql`
 
 mutation Mutation($styleCode: Int!, $colours: [ID]!) {
