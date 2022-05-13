@@ -2,19 +2,19 @@
     {
       "_id" : "627a4159c548608e13cd3476",
       "colourName": "Green",
-      "colourCode": 1000001,
+      "colourCode": 3000001,
       "colourDesc": "Dark Green Colour"
     },
     {
       "_id" : "627a4167a52e67f7fd36cc96",
       "colourName": "Maroon",
-      "colourCode": 1000002,
+      "colourCode": 3000002,
       "colourDesc": "Dark Maroon Colour"
     },
     {
       "_id" : "627a41766b75dd98dfeaac89",
       "colourName": "White",
-      "colourCode": 1000003,
+      "colourCode": 3000003,
       "colourDesc": "Snow White Colour"
     }
 ]

@@ -63,9 +63,9 @@ const Home = () => {
                         <h5 className="card-header bg-dark">
                           style={image.style.styleCode} colour=
                           {image.colour.colourCode} filename=
-                          {image.imageName} type={image.imageName.split('-')[2]}{" "}
+                          {image.imageName} type={image.imageName.split('_')[2]}{" "}
                           upload=
-                          {image.imageName.split('-')[3]}
+                          {image.imageName.split('_')[3]}
                         </h5>
                         <h5 className="card-header">
                           <img src={image.imageURL} width="100" height="100" />
