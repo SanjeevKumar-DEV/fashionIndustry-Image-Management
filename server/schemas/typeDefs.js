@@ -7,6 +7,7 @@ const typeDefs = gql`
     email: String
     password: String
     thoughts: [Thought]!
+    images: [Image]!
   }
 
   type Thought {
@@ -58,7 +59,7 @@ const typeDefs = gql`
     user(username: String!): User
     thoughts(username: String): [Thought]
     thought(thoughtId: ID!): Thought
-    userImages(username: String!): [User]
+    userImages(username: String!): User
     me: User
     styles: [Style]
     getStyleCode(styleCode: Int!): Style

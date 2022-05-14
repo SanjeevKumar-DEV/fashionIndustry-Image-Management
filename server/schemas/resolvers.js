@@ -16,7 +16,7 @@ const resolvers = {
     },
     userImages: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return User.find(params).sort({ createdAt: -1 });
+      return User.findOne({username}).populate("images");
     },
     //userImages
     thought: async (parent, { thoughtId }) => {
