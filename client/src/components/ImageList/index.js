@@ -155,7 +155,7 @@ const ImageList = ({ imageURLList = [], render }) => {
           ))}
       </div>
       <div >
-      <button id="add-Colour-Code" className="cloudinary-button" onClick={addColourCode}>Add Colour Style Image for Valid Images in Database</button>
+      <button id="add-Colour-Code" className="btn btn-lg btn-info m-2" onClick={addColourCode}>Add Colour Style Image for Valid Images in Database</button>
       </div>
     <h3
       className="p-5 display-inline-block"

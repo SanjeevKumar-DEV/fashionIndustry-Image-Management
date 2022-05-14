@@ -14,6 +14,11 @@ const resolvers = {
       const params = username ? { username } : {};
       return Thought.find(params).sort({ createdAt: -1 });
     },
+    userImages: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return User.find(params).sort({ createdAt: -1 });
+    },
+    //userImages
     thought: async (parent, { thoughtId }) => {
       return Thought.findOne({ _id: thoughtId });
     },
@@ -82,6 +87,27 @@ const resolvers = {
         );
 
         return thought;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    //addImageAgainstUser
+    addImageAgainstUser: async (parent, { imageId }, context) => {
+      if (context.user) {
+        // const thought = await Thought.create({
+        //   thoughtText,
+        //   thoughtAuthor: context.user.username,
+        // });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { images: imageId } },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+
+        // return thought;
       }
       throw new AuthenticationError("You need to be logged in!");
     },

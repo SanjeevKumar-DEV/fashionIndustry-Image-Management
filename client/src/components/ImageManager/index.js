@@ -60,7 +60,7 @@ const ImageManager = (props) => {
         <ImageList imageURLList={imageURLList.current} render={triggerRender} />
         <button
           id="upload_widget"
-          className="cloudinary-button"
+          className="cloudinary-button btn btn-lg btn-info m-2"
           onClick={uploadFiles}
         >
           Upload files

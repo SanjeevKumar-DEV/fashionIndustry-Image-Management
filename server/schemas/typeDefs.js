@@ -58,6 +58,7 @@ const typeDefs = gql`
     user(username: String!): User
     thoughts(username: String): [Thought]
     thought(thoughtId: ID!): Thought
+    userImages(username: String!): [User]
     me: User
     styles: [Style]
     getStyleCode(styleCode: Int!): Style
@@ -81,6 +82,7 @@ const typeDefs = gql`
     addStyleWithStyleCode(styleName: String, styleCode: Int!, styleDesc: String, colours: [ID]!): Style
     addStyleWithStyleCodeIfNotPresent(styleCode: Int!, colours: [ID]!): Style
     addImage(imageName: String!, imageURL: String!, style: ID!, colour: ID!): Image
+    addImageAgainstUser(imageId: [ID]!): User
   }
 `;
 
