@@ -23,7 +23,7 @@ const ProfileImageList = ({ username }) => {
             colourCode: imageSeparated[1],
             imageType: imageSeparated[2],
             imageNumber: imageSeparated[3],
-            original_filename: image.original_filename,
+            original_filename: image.imageName,
           };
         }
     });
