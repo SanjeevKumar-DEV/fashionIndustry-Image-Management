@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
-import { ADD_COLOUR_WITH_CODE, ADD_STYLE_WITH_CODE, ADD_IMAGE, UPSERT_COLOUR_WITH_CODE, ADD_STYLE_CODE_COLOUR_IF_NOT_PRESENT  } from '../../utils/mutations';
+import { ADD_COLOUR_WITH_CODE, ADD_STYLE_WITH_CODE, ADD_IMAGE, UPSERT_COLOUR_WITH_CODE, ADD_STYLE_CODE_COLOUR_IF_NOT_PRESENT, ADD_IMAGE_AGAINST_USER  } from '../../utils/mutations';
 import { QUERY_COLOUR_BY_COLOUR_CODE } from "../../utils/queries";
 // test now with invalid test test test test test test test test test test test
 
@@ -11,6 +11,7 @@ const ImageList = ({ imageURLList = [], render }) => {
   // const [addStyle, { styleError }] = useMutation(ADD_STYLE_WITH_CODE);
   const [addStyle, { styleError }] = useMutation(ADD_STYLE_CODE_COLOUR_IF_NOT_PRESENT);
   const [addImage, { imageError }] = useMutation(ADD_IMAGE);
+  const [addImageAgainstUser, { imageUserError }] = useMutation(ADD_IMAGE_AGAINST_USER);
 
   const [getExistingColourId, { loading, data } ] = useLazyQuery(QUERY_COLOUR_BY_COLOUR_CODE);
 
@@ -54,6 +55,23 @@ const ImageList = ({ imageURLList = [], render }) => {
 //   // console.log(data);
 //   counter++
 // }
+const addImageUploadedByUser = async (event, image, imageId) => {
+  event.preventDefault();
+  try {
+    const { data } = await addImageAgainstUser({
+      variables : {
+        imageId: imageId, 
+      }
+    })
+    console.log(data);
+  }
+  catch (event) {
+    console.log(event);
+    console.log(imageUserError);
+  }
+
+};
+
   const addImageData = async (event, image, styleId, colourId) => {
     event.preventDefault();
     try {
@@ -66,6 +84,7 @@ const ImageList = ({ imageURLList = [], render }) => {
         }
       })
       console.log(data);
+      addImageUploadedByUser(event, image, data.addImage._id);
     }
     catch (event) {
       console.log(event);

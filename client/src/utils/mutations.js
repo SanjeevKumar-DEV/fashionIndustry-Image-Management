@@ -134,4 +134,28 @@ mutation Mutation($imageName: String!, $imageURL: String!, $style: ID!, $colour:
 }
 `;
 
+export const ADD_IMAGE_AGAINST_USER = gql `
+mutation Mutation($imageId: [ID]!) {
+  addImageAgainstUser(imageId: $imageId) {
+    _id
+    username
+    email
+    images {
+      _id
+      imageName
+      imageURL
+      createdAt
+      style {
+        _id
+        styleCode
+      }
+      colour {
+        _id
+        colourCode
+      }
+    }
+  }
+}
+`;
+
 

@@ -16,7 +16,7 @@ const resolvers = {
     },
     userImages: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return User.findOne({username}).populate("images");
+      return User.findOne({ username }).populate("images");
     },
     //userImages
     thought: async (parent, { thoughtId }) => {
@@ -92,24 +92,33 @@ const resolvers = {
     },
     //addImageAgainstUser
     addImageAgainstUser: async (parent, { imageId }, context) => {
+      try {
       if (context.user) {
         // const thought = await Thought.create({
         //   thoughtText,
         //   thoughtAuthor: context.user.username,
         // });
+        if (context.user._id.length !== 0) {
+          console.log("User ID : ");
+          console.log(context.user._id);
+          console.log(context);
 
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { images: imageId } },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
+          await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $addToSet: { images: imageId } },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+        }
 
         // return thought;
       }
-      throw new AuthenticationError("You need to be logged in!");
+    }
+      catch(event){
+        new AuthenticationError("You need to be logged in!");
+      } 
     },
     addComment: async (parent, { thoughtId, commentText }, context) => {
       if (context.user) {
@@ -206,7 +215,6 @@ const resolvers = {
       parent,
       { styleCode, colours }
     ) => {
-      
       const dataWithStyle = await Style.findOne({ styleCode }).populate(
         "colours"
       );
@@ -245,7 +253,7 @@ const resolvers = {
     },
     addImage: async (parent, { imageName, imageURL, style, colour }) => {
       const data = await Image.findOne({ imageName });
-      if ( data !== null) {
+      if (data !== null) {
         return data;
       }
       const { _id } = await Image.create({

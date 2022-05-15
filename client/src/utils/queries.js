@@ -82,6 +82,34 @@ export const QUERY_IMAGE = gql`
   }
 `;
 
+export const USER_UPLOADED_IMAGES = gql`
+query Query($username: String!) {
+  userImages(username: $username) {
+    _id
+    username
+    email
+    images {
+      _id
+      imageName
+      imageURL
+      createdAt
+      style {
+        _id
+        styleName
+        styleCode
+        styleDesc
+      }
+      colour {
+        _id
+        colourName
+        colourCode
+        colourDesc
+      }
+    }
+  }
+}
+`;
+
 export const QUERY_STYLE_BY_STYLE_CODE = gql`
   query Query($styleCode: Int!) {
     getStyleCode(styleCode: $styleCode) {
