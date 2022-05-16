@@ -9,6 +9,9 @@ const ProfileImageList = ({ username }) => {
         variables: { username: username },
       });
 
+      console.log("username is :");
+      console.log(username);
+
     if (loading) {
         return <h3>Upload your image Files!</h3>;
       }
@@ -26,6 +29,7 @@ const ProfileImageList = ({ username }) => {
             original_filename: image.imageName,
           };
         }
+        return null;
     });
     
     return (
@@ -51,8 +55,8 @@ const ProfileImageList = ({ username }) => {
                     </h5>
                   </div>
                   <div>
-                  <button id="deleteThisImage" className="btn btn-lg btn-info m-2" onClick="">Delete</button>
-                  <button id="updateThisImage" className="btn btn-lg btn-info m-2" onClick="">Update</button>
+                  <button id="deleteThisImage" className="btn btn-lg btn-info m-2" alt="">Delete</button>
+                  <button id="updateThisImage" className="btn btn-lg btn-info m-2" alt="">Update</button>
                   </div>
                 </div>
               ))}

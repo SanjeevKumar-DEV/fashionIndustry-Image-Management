@@ -5,7 +5,6 @@ import { useQuery } from '@apollo/client';
 import ProfileImageList from '../components/ProfileImageList';
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
-import { USER_UPLOADED_IMAGES } from '../utils/queries';
 
 import Auth from '../utils/auth';
 
@@ -17,10 +16,6 @@ const Profile = () => {
     variables: { username: userParam },
   });
 
-
-  const { loadingUserImageData, userImagedata } = useQuery(USER_UPLOADED_IMAGES, {
-    variables: { username: userParam },
-  });
 
   const user = data?.me || data?.user || {};
   // navigate to personal profile page if username is yours

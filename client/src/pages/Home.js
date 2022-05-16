@@ -1,10 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 
-import ThoughtList from "../components/ThoughtList";
-import ThoughtForm from "../components/ThoughtForm";
-
-import { QUERY_THOUGHTS, QUERY_IMAGE } from "../utils/queries";
+import { QUERY_IMAGE } from "../utils/queries";
 import ImageManager from "../components/ImageManager";
 import Auth from "../utils/auth";
 
@@ -30,23 +27,6 @@ const Home = () => {
           >
             <ImageManager test="test" />
           </div>
-
-          {/* <div
-          className="col-12 col-md-10 mb-3 p-3"
-          style={{ border: '1px dotted #1a1a1a' }}
-        >
-          <ThoughtForm />
-        </div>
-        <div className="col-12 col-md-8 mb-3">
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <ThoughtList
-              thoughts={thoughts}
-              title="Some Feed for Thought(s)..."
-            />
-          )}
-        </div> */}
         </div>
       ) : (
         <div>
@@ -63,12 +43,12 @@ const Home = () => {
                         <h5 className="card-header bg-dark">
                           style={image.style.styleCode} colour=
                           {image.colour.colourCode} filename=
-                          {image.imageName} type={image.imageName.split('_')[2]}{" "}
+                          {image.imageName} type={image.imageName.split("_")[2]}{" "}
                           upload=
-                          {image.imageName.split('_')[3]}
+                          {image.imageName.split("_")[3]}
                         </h5>
                         <h5 className="card-header">
-                          <img src={image.imageURL} width="100" height="100" />
+                          <img src={image.imageURL} width="100" height="100" alt=""/>
                         </h5>
                       </div>
                     </div>
