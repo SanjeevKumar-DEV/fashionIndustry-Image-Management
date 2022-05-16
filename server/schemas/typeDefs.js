@@ -62,6 +62,7 @@ const typeDefs = gql`
     addStyleWithStyleCodeIfNotPresent(styleCode: Int!, colours: [ID]!): Style
     addImage(imageName: String!, imageURL: String!, style: ID!, colour: ID!): Image
     addImageAgainstUser(imageId: [ID]!): User
+    removeImage(imageId: ID!): Image
   }
 `;
 

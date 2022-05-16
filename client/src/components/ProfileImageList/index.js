@@ -2,6 +2,7 @@ import React from "react";
 
 import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
 import { USER_UPLOADED_IMAGES } from "../../utils/queries";
+import { REMOVE_IMAGE } from "../../utils/mutations";
 
 const ProfileImageList = ({ username }) => {
 
@@ -9,8 +10,27 @@ const ProfileImageList = ({ username }) => {
         variables: { username: username },
       });
 
+    const [removeImage, { removeImageError }] = useMutation(REMOVE_IMAGE);
+
       console.log("username is :");
       console.log(username);
+
+      const removeImageByUser = async (imageId) => {
+        // event.preventDefault();
+        try {
+          const { data } = await removeImage({
+            variables : {
+              imageId: imageId, 
+            }
+          })
+          console.log(data);
+        }
+        catch (event) {
+          console.log(event);
+          console.log(removeImageError);
+        }
+      
+      };
 
     if (loading) {
         return <h3>Upload your image Files!</h3>;
@@ -55,8 +75,8 @@ const ProfileImageList = ({ username }) => {
                     </h5>
                   </div>
                   <div>
-                  <button id="deleteThisImage" className="btn btn-lg btn-info m-2" alt="">Delete</button>
-                  <button id="updateThisImage" className="btn btn-lg btn-info m-2" alt="">Update</button>
+                  <button id={image.id} className="btn btn-lg btn-info m-2" onClick={() => removeImageByUser(image.id)}>Delete</button>
+                  <button id={image.original_filename} className="btn btn-lg btn-info m-2" >Update</button>
                   </div>
                 </div>
               ))}

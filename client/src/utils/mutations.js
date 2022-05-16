@@ -158,4 +158,22 @@ mutation Mutation($imageId: [ID]!) {
 }
 `;
 
+export const REMOVE_IMAGE = gql `
+mutation Mutation($imageId: ID!) {
+  removeImage(imageId: $imageId) {
+    _id
+    imageName
+    imageURL
+    createdAt
+    style {
+      _id
+      styleName
+    }
+    colour {
+      _id
+      colourCode
+    }
+  }
+}
+`;
 

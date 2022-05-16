@@ -129,22 +129,22 @@ const resolvers = {
     //   }
     //   throw new AuthenticationError("You need to be logged in!");
     // },
-    // removeThought: async (parent, { thoughtId }, context) => {
-    //   if (context.user) {
-    //     const thought = await Thought.findOneAndDelete({
-    //       _id: thoughtId,
-    //       thoughtAuthor: context.user.username,
-    //     });
+    removeImage: async (parent, { imageId }, context) => {
+      if (context.user) {
+        const image = await Image.findOneAndDelete({
+          _id: imageId
+      
+        });
 
-    //     await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $pull: { thoughts: thought._id } }
-    //     );
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { images: image._id } }
+        );
 
-    //     return thought;
-    //   }
-    //   throw new AuthenticationError("You need to be logged in!");
-    // },
+        return image;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
     // removeComment: async (parent, { thoughtId, commentId }, context) => {
     //   if (context.user) {
     //     return Thought.findOneAndUpdate(
